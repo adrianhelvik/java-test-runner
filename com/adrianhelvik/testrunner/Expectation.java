@@ -36,7 +36,7 @@ public class Expectation {
 
         this.passed = this.value == value;
 
-        return evaluate();
+        return evaluate(value);
     }
 
     public TestDescription toEqual(Object value) {
@@ -46,24 +46,24 @@ public class Expectation {
 
         this.passed = this.value.equals(value);
 
-        return evaluate();
+        return evaluate(value);
     }
 
-    TestDescription evaluate() {
+    TestDescription evaluate(Object value) {
 
         if (negated) negate();
 
-        System.out.println( this.message() );
+        System.out.println( this.message(value) );
 
         return this.description;
     }
 
-    String message() {
+    String message(Object value) {
         if (passed) {
             return "Test passed: " + description + " " + assertion;
         }
 
-        return "FAILURE --- Expected: " + description + " " + assertion + ", but " + this.value + (negated ? " = " : " ≠ ") + value;
+        return "FAILURE --- Expected: " + description + " " + assertion + ", but " + value + (negated ? " = " : " ≠ ") + this.value;
     }
 
     void negate() {
