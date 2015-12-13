@@ -63,7 +63,7 @@ public class Expectation {
             return "Test passed: " + description + " " + assertion;
         }
 
-        return "FAILURE --- Expected: " + description + " " + assertion + ", but " + value + (negated ? " = " : " ≠ ") + this.value;
+        return "FAILURE --- Expected: " + description + " " + assertion + ", but " + this.value + (negated ? " = " : " ≠ ") + value;
     }
 
     void negate() {
