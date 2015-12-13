@@ -1,3 +1,5 @@
+package com.adrianhelvik.testrunner;
+
 public class Expectation {
 
     private boolean negated;

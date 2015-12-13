@@ -1,3 +1,4 @@
+package com.adrianhelvik.testrunner;
 
 public class Assertion {
 

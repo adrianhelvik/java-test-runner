@@ -1,3 +1,5 @@
+package com.adrianhelvik.testrunner;
+
 public class TestDescription {
 
     private String description;
