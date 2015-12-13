@@ -2,6 +2,8 @@ package com.adrianhelvik.testrunner;
 
 public class TestDescription {
 
+    long startTime = -1;
+
     private String description;
     private Assertion currentAssertion;
 
@@ -22,7 +24,18 @@ public class TestDescription {
     }
 
     public Expectation expect(Object value) {
-        return currentAssertion.expect(value);
+        Expectation toExpect = currentAssertion.expect(value);
+
+        return toExpect;
+    }
+
+    public Expectation xexpect(Object value) {
+        return currentAssertion.xexpect(value);
+    }
+
+    public TestDescription time() {
+        this.startTime = System.nanoTime();
+        return this;
     }
 
     @Override

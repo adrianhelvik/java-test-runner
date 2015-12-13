@@ -16,6 +16,26 @@ public class Assertion {
         return new Expectation(this, this.description, value, silent);
     }
 
+    public Expectation xexpect(Object value) {
+        beSilent();
+        Expectation result = new Expectation(this, this.description, value, silent);
+        dontBeSilent();
+        return result;
+    }
+
+    public void dontBeSilent() {
+        this.silent = false;
+    }
+
+    public void beSilent() {
+        this.silent = true;
+    }
+
+    public Assertion time() {
+        description.time();
+        return this;
+    }
+
     @Override
     public String toString() {
         return expectation;

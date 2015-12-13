@@ -34,7 +34,11 @@ public class Expectation {
         if (silent)
             return this.description;
 
-        this.passed = this.value == value;
+        try {
+            this.passed = this.value == value;
+        } catch (Exception e) {
+            this.passed = false;
+        }
 
         return evaluate(value);
     }
@@ -44,7 +48,11 @@ public class Expectation {
         if (silent)
             return this.description;
 
-        this.passed = this.value.equals(value);
+        try {
+            this.passed = this.value.equals(value);
+        } catch (Exception e) {
+            this.passed = false;
+        }
 
         return evaluate(value);
     }
@@ -59,11 +67,25 @@ public class Expectation {
     }
 
     String message(Object value) {
-        if (passed) {
-            return "Test passed: " + description + " " + assertion;
+        String time = "";
+
+        if (description.startTime != -1) {
+            time = TerminalColor.blue(" in " + (System.nanoTime() - description.startTime) + " nano seconds.");
+            description.startTime = -1;
         }
 
-        return "FAILURE --- Expected: " + description + " " + assertion + ", but " + this.value + (negated ? " = " : " ≠ ") + value;
+        if (passed) {
+            return TerminalColor.green("Test passed: " + description + " " + assertion + time);
+        }
+
+        String message = "FAILURE --- Expected: " + description + " " + assertion + ". ";
+
+        if (negated)
+            message += this.value + " was " + value;
+        else
+            message += this.value + " was not " + value;
+
+        return TerminalColor.red( message );
     }
 
     void negate() {
