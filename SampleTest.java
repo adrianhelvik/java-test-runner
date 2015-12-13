@@ -10,7 +10,6 @@ class SampleTest extends TestCase {
         describe("toBe")
             .it("tests for equality with the == operator")
             .expect(10).toBe(10)
-            .it("should not work for object references")
             .expect(new String("Hello")).not.toBe(new String("Hello"));
 
         describe("toEqual")
