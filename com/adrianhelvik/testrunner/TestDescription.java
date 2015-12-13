@@ -38,6 +38,20 @@ public class TestDescription {
         return this;
     }
 
+    public TestDescription call() {
+        System.out.println( TerminalColor.yellow( description + " " + currentAssertion.toString() ) );
+        System.out.print( TerminalColor.yellow("Call complete. ") );
+
+        if (startTime != -1) {
+            System.out.println( TerminalColor.blue("Time: " + (System.nanoTime() - startTime) + " nano seconds"));
+            startTime = -1;
+        } else {
+            System.out.println();
+        }
+
+        return this;
+    }
+
     @Override
     public String toString() {
         return description;

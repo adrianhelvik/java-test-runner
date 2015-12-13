@@ -22,4 +22,8 @@ public class TerminalColor {
     public static String blue(String message) {
         return ANSI_BLUE + message + ANSI_RESET;
     }
+
+    public static String yellow(String message) {
+        return ANSI_YELLOW + message + ANSI_RESET;
+    }
 }

@@ -36,6 +36,10 @@ public class Assertion {
         return this;
     }
 
+    public TestDescription call(Object o) {
+        return description.call();
+    }
+
     @Override
     public String toString() {
         return expectation;

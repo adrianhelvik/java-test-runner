@@ -17,5 +17,15 @@ class SampleTest extends TestCase {
             .expect(new String("Hello")).toEqual(new String("Hello"))
             .it("should also work for primitives")
             .expect(1337).toEqual(1337);
+
+        describe("Timing a call is easy...")
+            .it("just call time() before a test.")
+            .time()
+            .expect(true).toBe(true)
+            .it("but maybe you don't want to test anything, just test the execution time of a function.")
+            .time()
+            .call("Hello world".matches("world"))
+            .it("and calling the method without timinging it will just not display any time")
+            .call("Hello world".matches("world"));
     }
 }
