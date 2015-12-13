@@ -13,3 +13,4 @@ all:
 	mkdir -p build/
 	javac -d build/ ${SOURCE_FILES} ${TEST_FILES}
 	cd build && java SampleTest
+	cd build && rm SampleTest.class
