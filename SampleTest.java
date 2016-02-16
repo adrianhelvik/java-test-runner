@@ -10,7 +10,7 @@ class SampleTest extends TestCase {
         describe("toBe")
             .it("tests for equality with the == operator")
             .expect(10).toBe(10)
-            .expect(new String("Hello")).not.toBe(new String("Hello"));
+            .expect(new String("Hello")).not.toBe(new String("Helloh".substring( 0, "Helloh".length() - 1 )));
 
         describe("toEqual")
             .it("tests for equality with the .equals method and should work for object references")
@@ -27,5 +27,9 @@ class SampleTest extends TestCase {
             .call("Hello world".matches("world"))
             .it("and calling the method without timinging it will just not display any time")
             .call("Hello world".matches("world"));
+
+        describe("Comparing arrays")
+            .it("should pass with toEqual if the arrays are equivalent")
+            .expect( new int[] { 1, 2, 3 } ).toEqual( new int[] { 1, 2, 3 } );
     }
 }

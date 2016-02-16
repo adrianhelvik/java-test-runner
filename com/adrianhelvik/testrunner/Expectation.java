@@ -1,5 +1,7 @@
 package com.adrianhelvik.testrunner;
 
+import java.util.Arrays;
+
 public class Expectation {
 
     private boolean negated;
@@ -54,6 +56,10 @@ public class Expectation {
             this.passed = false;
         }
 
+        if ( ! passed && this.value instanceof int[] && value instanceof int[] ) {
+            this.passed = Arrays.equals( (int[]) this.value, (int[]) value );
+        }
+
         return evaluate(value);
     }
 
@@ -80,15 +86,31 @@ public class Expectation {
 
         String message = "FAILURE --- Expected: " + description + " " + assertion + ". ";
 
+        String ownValue = valueToString( this.value );
+        String otherValue = valueToString( value );
+
         if (negated)
-            message += this.value + " was " + value;
+            message += ownValue + " was " + otherValue;
         else
-            message += this.value + " was not " + value;
+            message += ownValue + " was not " + otherValue;
 
         return TerminalColor.red( message );
     }
 
+    String valueToString( Object value ) {
+        if ( value instanceof int[] )
+            return Arrays.toString( (int[]) value );
+
+        if ( value instanceof boolean[] )
+            return Arrays.toString( (boolean[]) value );
+
+        if ( value instanceof Object[] )
+            return Arrays.toString( (Object[]) value );
+
+        return value.toString();
+    }
+
     void negate() {
-            this.passed = ! this.passed;
+        this.passed = ! this.passed;
     }
 }
